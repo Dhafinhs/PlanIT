@@ -15,11 +15,35 @@ const api = {
   updateData: (id, data) => axios.put(`${API_URL}/data/${id}`, data),
   deleteData: (id) => axios.delete(`${API_URL}/data/${id}`),
   
-  // Friend related endpoints
-  searchUsers: (query) => axios.get(`${API_URL}/users/search`, { params: { query } }),
-  sendFriendRequest: (friendId) => axios.post(`${API_URL}/friends/request`, { friend_id: friendId }, {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  // Enhanced friend related endpoints
+  searchUsers: (query) => axios.get(`${API_URL}/users/search`, {
+    params: { query },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
   }),
+  
+  getFriends: () => axios.get(`${API_URL}/friends`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+  }),
+  
+  getPendingRequests: () => axios.get(`${API_URL}/friends/pending`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+  }),
+  
+  sendFriendRequest: (friendId) => axios.post(`${API_URL}/friends/request`, 
+    { friend_id: friendId },
+    { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+  ),
+  
+  acceptFriendRequest: (friendId) => axios.post(`${API_URL}/friends/accept`,
+    { friend_id: friendId },
+    { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+  ),
+  
+  rejectFriendRequest: (friendId) => axios.post(`${API_URL}/friends/reject`,
+    { friend_id: friendId },
+    { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+  ),
+  
   getFriendSchedules: (friendId) => axios.get(`${API_URL}/schedules/${friendId}`, {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }),

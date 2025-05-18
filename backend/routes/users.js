@@ -19,7 +19,7 @@ router.get('/search', auth, async (req, res) => {
 router.get('/', auth, async (req, res) => {
   try {
     const result = await db.query(
-      "SELECT id, name FROM users WHERE id != $1",
+      "SELECT id, name, username FROM users WHERE id != $1",
       [req.user.id]
     );
     res.json(result.rows);
