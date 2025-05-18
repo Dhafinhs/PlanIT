@@ -19,15 +19,30 @@ function Schedules() {
     fetchSchedules();
   }, []);
 
+  const getCardClass = (visibility) => {
+    switch (visibility) {
+      case 'public':
+        return 'card card-public';
+      case 'private':
+        return 'card card-private';
+      case 'hidden':
+        return 'card card-hidden';
+      default:
+        return 'card';
+    }
+  };
+
   return (
     <div className="min-h-screen p-6 bg-gray-100 animate-slide-up">
       <h1 className="text-2xl font-bold mb-4">Your Schedules</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {schedules.map((schedule) => (
-          <div key={schedule.id} className="p-4 bg-white shadow rounded card">
-            <h2 className="text-xl font-bold">{schedule.title}</h2>
-            <p>{schedule.description}</p>
-            <p className="text-sm text-gray-500">{schedule.start_time} - {schedule.end_time}</p>
+          <div key={schedule.id} className={getCardClass(schedule.visibility)}>
+            <h2 className="card-title">{schedule.title}</h2>
+            {schedule.description && <p className="card-description">{schedule.description}</p>}
+            <p className="card-time">
+              {schedule.start_time} - {schedule.end_time}
+            </p>
           </div>
         ))}
       </div>

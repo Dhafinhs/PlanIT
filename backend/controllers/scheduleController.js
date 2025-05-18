@@ -31,15 +31,15 @@ exports.getFriendSchedules = async (req, res) => {
     const result = await db.query(
       `SELECT id, start_time, end_time, visibility,
         CASE 
-          WHEN visibility = 'hidden' THEN 'Hidden Schedule'
+          WHEN visibility = 'private' THEN 'Private Schedule'
           ELSE title
         END AS title,
         CASE 
-          WHEN visibility = 'hidden' THEN null
+          WHEN visibility = 'private' THEN null
           ELSE description
         END AS description
        FROM schedules
-       WHERE user_id = $1 AND visibility IN ('public', 'hidden')`,
+       WHERE user_id = $1 AND visibility IN ('public', 'private')`,
       [friendId]
     );
     res.json(result.rows);

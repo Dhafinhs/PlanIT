@@ -7,6 +7,7 @@ import Schedules from './pages/Schedules';
 import Friends from './pages/Friends';
 import FriendSchedules from './pages/FriendSchedules';
 import ProtectedRoute from './components/ProtectedRoute';
+import AddSchedule from './pages/AddSchedule';
 
 function App() {
   return (
@@ -34,6 +35,11 @@ function App() {
         <Route path="/friends/:friendId/schedules" element={
           <ProtectedRoute>
             <FriendSchedules />
+          </ProtectedRoute>
+        } />
+        <Route path="/schedules/add" element={
+          <ProtectedRoute>
+            <AddSchedule />
           </ProtectedRoute>
         } />
       </Routes>
