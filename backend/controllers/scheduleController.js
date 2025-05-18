@@ -32,22 +32,31 @@ exports.getFriendSchedules = async (req, res) => {
   const friendId = req.params.friendId;
   try {
     const result = await db.query(
-      `SELECT schedules.id, schedules.start_time, schedules.end_time, schedules.visibility,
-        CASE 
-          WHEN schedules.visibility = 'private' THEN 'Private Schedule'
-          ELSE schedules.title
-        END AS title,
-        CASE 
-          WHEN schedules.visibility = 'private' THEN null
-          ELSE schedules.description
-        END AS description,
-        users.name AS owner_name
+      `SELECT 
+        schedules.id, 
+        schedules.start_time, 
+        schedules.end_time, 
+        schedules.visibility,
+        schedules.title,
+        schedules.description,
+        users.name AS owner_name,
+        schedules.user_id AS owner_id
        FROM schedules
        JOIN users ON schedules.user_id = users.id
-       WHERE schedules.user_id = $1 AND schedules.visibility IN ('public', 'private')`,
+       WHERE schedules.user_id = $1 
+       AND schedules.visibility != 'hidden'
+       ORDER BY schedules.start_time ASC`,
       [friendId]
     );
-    res.json(result.rows);
+    
+    // Transform the data to handle private schedules
+    const schedules = result.rows.map(schedule => ({
+      ...schedule,
+      title: schedule.visibility === 'private' ? 'Busy' : schedule.title,
+      description: schedule.visibility === 'private' ? null : schedule.description
+    }));
+    
+    res.json(schedules);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

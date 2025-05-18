@@ -14,7 +14,7 @@ function Navbar() {
     <nav className="bg-[#302d41] text-[#cdd6f4] p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo and Title */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-3 logo-container">
           <img src={logo} alt="PlanIt Logo" className="h-12 w-12" />
           <h1 className="text-2xl font-extrabold text-[#89b4fa] tracking-wide hover:text-[#cdd6f4] transition duration-300">
             Plan<span className="text-[#f38ba8]">IT</span>

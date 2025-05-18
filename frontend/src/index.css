@@ -22,8 +22,8 @@ h1, h2, h3 {
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .card-title {
@@ -73,10 +73,23 @@ button {
   color: #ffffff;
   font-weight: bold;
   cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #7395d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(137, 180, 250, 0.3);
+}
+
+select {
+  background-color: #302d41;
+  color: #cdd6f4;
+  border: 1px solid #45475a;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .animate-fade-in {
@@ -157,10 +170,12 @@ button:hover {
 .calendar {
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 1rem;
-  background-color: #181825; /* Darker background for the calendar */
+  gap: 1px;
+  background-color: #181825;
   border-radius: 8px;
   overflow: hidden;
+  max-height: calc(100vh - 200px);
+  border: 1px solid #45475a;
 }
 
 .calendar-header {
@@ -168,30 +183,28 @@ button:hover {
   grid-template-columns: 80px repeat(7, 1fr);
   text-align: center;
   font-weight: bold;
-  background-color: #302d41; /* Header background */
+  background-color: #302d41;
   color: #cdd6f4;
+  padding: 0.5rem 0;
+  animation: float 6s ease-in-out infinite;
 }
 
 .calendar-body {
   display: grid;
-  grid-template-rows: repeat(24, 1fr);
   grid-template-columns: 80px repeat(7, 1fr);
-}
-
-.calendar-row {
-  display: contents;
+  gap: 1px;
+  background-color: #45475a;
 }
 
 .calendar-cell {
-  border: 1px solid #45475a; /* Cell border */
+  background-color: #1e1e2e;
   position: relative;
   height: 60px;
-  background-color: #1e1e2e; /* Cell background */
-  cursor: pointer;
+  overflow: hidden;
 }
 
 .calendar-cell:hover {
-  background-color: #302d41; /* Hover effect */
+  background-color: #302d41;
 }
 
 .calendar-time-label {
@@ -199,34 +212,45 @@ button:hover {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  background-color: #302d41; /* Time label background */
+  background-color: #302d41;
   color: #cdd6f4;
   border-right: 1px solid #45475a;
 }
 
-.schedule-block {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  border-radius: 8px;
-  padding: 0.5rem;
+.calendar-date {
   font-size: 0.875rem;
   font-weight: bold;
+  color: #cdd6f4;
+}
+
+.schedule-block {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  border-radius: 4px;
+  padding: 0.25rem;
+  font-size: 0.75rem;
   color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  transition: all 0.3s ease;
+  animation: fadeScale 0.3s ease;
+}
+
+.schedule-block:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
 
 .schedule-block-public {
-  background-color: #89b4fa; /* Blue for public schedules */
+  background-color: #89b4fa;
 }
 
 .schedule-block-private {
-  background-color: #f38ba8; /* Red for private schedules */
+  background-color: #f38ba8;
 }
 
 .schedule-block-hidden {
@@ -239,7 +263,42 @@ button:hover {
 
 .schedule-block-friend {
   border: 2px dashed #94e2d5; /* Green dashed border for friend schedules */
+  opacity: 0.9;
 }
+
+.schedule-block-public.schedule-block-friend {
+  background-color: #94e2d5;
+}
+
+.schedule-block-private.schedule-block-friend {
+  background-color: #f38ba8;
+  opacity: 0.7;
+}
+
+/* Own schedule visibility styles */
+.schedule-block-own-public {
+  background-color: #89b4fa;
+  border: 2px solid #74c7ec;
+}
+
+.schedule-block-own-private {
+  background-color: #89b4fa;
+  opacity: 0.9;
+  border: 2px solid #74c7ec;
+}
+
+.schedule-block-own-hidden {
+  background-color: #89b4fa;
+  opacity: 0.7;
+  border: 2px solid #74c7ec;
+}
+
+/* Friend schedule styles with unique colors for each friend */
+.schedule-block-friend-0 { background-color: #f38ba8; border: 2px solid #eba0ac; }
+.schedule-block-friend-1 { background-color: #a6e3a1; border: 2px solid #94e2d5; }
+.schedule-block-friend-2 { background-color: #fab387; border: 2px solid #f9e2af; }
+.schedule-block-friend-3 { background-color: #cba6f7; border: 2px solid #b4befe; }
+.schedule-block-friend-4 { background-color: #f5c2e7; border: 2px solid #f5e0dc; }
 
 nav {
   display: flex;
@@ -262,4 +321,165 @@ nav h2 {
   font-size: 0.875rem; /* 14px */
   font-weight: 600;
   color: #89b4fa; /* Light blue */
+}
+
+.calendar table {
+  border-spacing: 0;
+}
+
+.calendar th,
+.calendar td {
+  border: 1px solid #45475a;
+}
+
+.calendar thead th {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: #302d41;
+}
+
+.calendar tbody td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  background-color: #302d41;
+}
+
+.calendar-container {
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - 180px);
+  border-radius: 8px;
+  border: 1px solid #45475a;
+  background-color: #181825;
+}
+
+.calendar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #45475a #1e1e2e;
+}
+
+.calendar-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.calendar-scroll::-webkit-scrollbar-track {
+  background: #1e1e2e;
+}
+
+.calendar-scroll::-webkit-scrollbar-thumb {
+  background-color: #45475a;
+  border-radius: 4px;
+}
+
+.calendar-scroll::-webkit-scrollbar-corner {
+  background: #1e1e2e;
+}
+
+/* Friends list styles */
+.form-checkbox {
+  appearance: none;
+  padding: 0;
+  border: 2px solid #45475a;
+  border-radius: 4px;
+  background-color: #1e1e2e;
+  cursor: pointer;
+}
+
+.form-checkbox:checked {
+  background-color: #89b4fa;
+  border-color: #89b4fa;
+}
+
+.form-checkbox:hover {
+  border-color: #89b4fa;
+}
+
+/* Add this near other calendar styles */
+.calendar td {
+  transition: background-color 0.2s ease;
+}
+
+.calendar td:hover {
+  background-color: #313244 !important;
+}
+
+/* Custom cursor for clickable cells */
+td[onclick] {
+  cursor: pointer;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeScale {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Friend list animations */
+.friends-list-item {
+  animation: slideIn 0.5s ease;
+  animation-fill-mode: both;
+}
+
+.friends-list-item:nth-child(1) { animation-delay: 0.1s; }
+.friends-list-item:nth-child(2) { animation-delay: 0.2s; }
+.friends-list-item:nth-child(3) { animation-delay: 0.3s; }
+
+/* Loading state animation */
+.loading-skeleton {
+  background: linear-gradient(90deg, #302d41 25%, #45475a 50%, #302d41 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Navigation link hover effect */
+nav a {
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #89b4fa;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Calendar cell hover animation */
+td[onclick]:hover {
+  animation: pulse 0.5s ease;
 }
