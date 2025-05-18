@@ -16,7 +16,10 @@ exports.createSchedule = async (req, res) => {
 exports.getOwnSchedules = async (req, res) => {
   try {
     const result = await db.query(
-      "SELECT * FROM schedules WHERE user_id = $1",
+      `SELECT schedules.*, users.name AS owner_name
+       FROM schedules
+       JOIN users ON schedules.user_id = users.id
+       WHERE schedules.user_id = $1`,
       [req.user.id]
     );
     res.json(result.rows);
@@ -29,17 +32,19 @@ exports.getFriendSchedules = async (req, res) => {
   const friendId = req.params.friendId;
   try {
     const result = await db.query(
-      `SELECT id, start_time, end_time, visibility,
+      `SELECT schedules.id, schedules.start_time, schedules.end_time, schedules.visibility,
         CASE 
-          WHEN visibility = 'private' THEN 'Private Schedule'
-          ELSE title
+          WHEN schedules.visibility = 'private' THEN 'Private Schedule'
+          ELSE schedules.title
         END AS title,
         CASE 
-          WHEN visibility = 'private' THEN null
-          ELSE description
-        END AS description
+          WHEN schedules.visibility = 'private' THEN null
+          ELSE schedules.description
+        END AS description,
+        users.name AS owner_name
        FROM schedules
-       WHERE user_id = $1 AND visibility IN ('public', 'private')`,
+       JOIN users ON schedules.user_id = users.id
+       WHERE schedules.user_id = $1 AND schedules.visibility IN ('public', 'private')`,
       [friendId]
     );
     res.json(result.rows);

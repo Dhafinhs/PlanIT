@@ -90,7 +90,7 @@ function Home() {
     return (
       <div className="calendar">
         <div className="calendar-header">
-          <div className="calendar-time-label"></div>
+          <div className="calendar-time-label">Jam</div>
           {weekDates.map((date) => (
             <div key={date} className="calendar-day">
               <div>{days[date.getDay()]}</div>
@@ -124,6 +124,9 @@ function Home() {
                         title={`${schedule.title} (${schedule.start_time} - ${schedule.end_time})`}
                       >
                         <div className="schedule-title">{schedule.title}</div>
+                        <div className="text-xs text-white">
+                          Owner: {userSchedules.includes(schedule) ? 'You' : schedule.owner_name}
+                        </div>
                       </div>
                     ))}
                 </div>
@@ -136,14 +139,14 @@ function Home() {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100 flex">
-      <div className="w-1/4 p-4 bg-white shadow rounded">
-        <h2 className="text-xl font-bold mb-4">Friends</h2>
+    <div className="min-h-screen p-6 bg-[#1e1e2e] flex">
+      <div className="w-1/4 p-4 bg-[#302d41] shadow rounded">
+        <h2 className="text-xl font-bold mb-4 text-[#cdd6f4]">Friends</h2>
         <ul>
           {friends.map((friend) => (
             <li
               key={friend.id}
-              className="cursor-pointer hover:underline"
+              className="cursor-pointer hover:underline text-[#cdd6f4]"
               onClick={() => handleFriendClick(friend.id)}
             >
               {friend.name}
@@ -152,7 +155,7 @@ function Home() {
         </ul>
       </div>
       <div className="w-3/4 p-4">
-        <h1 className="text-3xl font-bold mb-4">Hi, {user} 👋</h1>
+        <h1 className="text-3xl font-bold mb-4 text-[#cdd6f4]">Hi, {user} 👋</h1>
         {renderCalendar()}
       </div>
     </div>

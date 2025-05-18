@@ -34,8 +34,8 @@ function FriendSchedules() {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Friend's Schedules</h1>
+    <div className="min-h-screen p-6 bg-[#1e1e2e]">
+      <h1 className="text-2xl font-bold mb-4 text-[#cdd6f4]">Friend's Schedules</h1>
       {loading && <div className="spinner mx-auto"></div>}
       {!loading && schedules.length === 0 && (
         <p className="empty-state">This friend has no schedules available.</p>
@@ -48,6 +48,7 @@ function FriendSchedules() {
             <p className="card-time">
               {schedule.start_time} - {schedule.end_time}
             </p>
+            <p className="text-sm text-white">Owner: {schedule.owner_name}</p> {/* Gunakan nama pemilik jadwal */}
           </div>
         ))}
       </div>

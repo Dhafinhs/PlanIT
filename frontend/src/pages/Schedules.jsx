@@ -33,8 +33,8 @@ function Schedules() {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100 animate-slide-up">
-      <h1 className="text-2xl font-bold mb-4">Your Schedules</h1>
+    <div className="min-h-screen p-6 bg-[#1e1e2e] animate-slide-up">
+      <h1 className="text-2xl font-bold mb-4 text-[#cdd6f4]">Your Schedules</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {schedules.map((schedule) => (
           <div key={schedule.id} className={getCardClass(schedule.visibility)}>
@@ -43,6 +43,7 @@ function Schedules() {
             <p className="card-time">
               {schedule.start_time} - {schedule.end_time}
             </p>
+            <p className="text-sm text-white">Owner: You</p>
           </div>
         ))}
       </div>

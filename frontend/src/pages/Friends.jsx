@@ -38,23 +38,23 @@ function Friends() {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100">
+    <div className="min-h-screen p-6 bg-[#1e1e2e]">
       {notification && <Notification message={notification} onClose={() => setNotification('')} />}
-      <h1 className="text-2xl font-bold mb-4">All Users</h1>
+      <h1 className="text-2xl font-bold mb-4 text-[#cdd6f4]">All Users</h1>
       {loading && <div className="spinner mx-auto"></div>}
       {!loading && users.length === 0 && (
         <p className="empty-state">No users available.</p>
       )}
       <ul className="space-y-2">
         {users.map((user) => (
-          <li key={user.id} className="p-4 bg-white shadow rounded flex justify-between items-center">
-            <span>{user.name}</span>
+          <li key={user.id} className="p-4 bg-[#302d41] shadow rounded flex justify-between items-center">
+            <span className="text-[#cdd6f4]">{user.name}</span>
             {friends.includes(user.id) ? (
-              <span className="text-green-600 font-bold">Friend</span>
+              <span className="text-[#94e2d5] font-bold">Friend</span>
             ) : (
               <button
                 onClick={() => handleAddFriend(user.id)}
-                className="bg-green-600 text-white px-4 py-2 rounded"
+                className="px-4 py-2"
               >
                 Add Friend
               </button>

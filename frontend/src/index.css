@@ -4,10 +4,12 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  background-color: #1e1e2e; /* Dark background */
+  color: #cdd6f4; /* Light text */
 }
 
 h1, h2, h3 {
-  color: #1e293b;
+  color: #cdd6f4;
 }
 
 .card {
@@ -15,7 +17,8 @@ h1, h2, h3 {
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  background-color: #302d41; /* Match calendar header background */
+  color: #cdd6f4;
 }
 
 .card:hover {
@@ -31,25 +34,49 @@ h1, h2, h3 {
 
 .card-description {
   font-size: 0.875rem;
-  color: #4b5563;
+  color: #a6adc8; /* Subtle text color */
   margin-bottom: 0.5rem;
 }
 
 .card-time {
   font-size: 0.75rem;
-  color: #6b7280;
+  color: #a6adc8;
 }
 
 .card-public {
-  border-left: 4px solid #34d399; /* Green */
+  border-left: 4px solid #89b4fa; /* Blue for public schedules */
 }
 
 .card-private {
-  border-left: 4px solid #60a5fa; /* Blue */
+  border-left: 4px solid #f38ba8; /* Red for private schedules */
 }
 
 .card-hidden {
-  border-left: 4px solid #f87171; /* Red */
+  border-left: 4px solid #a6adc8; /* Gray for hidden schedules */
+}
+
+input, textarea, select, button {
+  border-radius: 4px;
+  border: 1px solid #45475a;
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  padding: 0.5rem;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #89b4fa;
+}
+
+button {
+  background-color: #89b4fa;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #7395d3;
 }
 
 .animate-fade-in {
@@ -110,8 +137,8 @@ h1, h2, h3 {
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background-color: #4caf50;
-  color: white;
+  background-color: #89b4fa; /* Match public schedule color */
+  color: #ffffff;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -131,6 +158,9 @@ h1, h2, h3 {
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 1rem;
+  background-color: #181825; /* Darker background for the calendar */
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .calendar-header {
@@ -138,6 +168,8 @@ h1, h2, h3 {
   grid-template-columns: 80px repeat(7, 1fr);
   text-align: center;
   font-weight: bold;
+  background-color: #302d41; /* Header background */
+  color: #cdd6f4;
 }
 
 .calendar-body {
@@ -151,52 +183,15 @@ h1, h2, h3 {
 }
 
 .calendar-cell {
-  border: 1px solid #e5e7eb;
+  border: 1px solid #45475a; /* Cell border */
   position: relative;
-  height: 50px;
+  height: 60px;
+  background-color: #1e1e2e; /* Cell background */
+  cursor: pointer;
 }
 
-.schedule-block {
-  background-color: #3b82f6;
-  border-radius: 4px;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-}
-
-.schedule-block-public {
-  background-color: #34d399; /* Green */
-  color: white;
-  padding: 0.25rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  text-align: center;
-}
-
-.schedule-block-private {
-  background-color: #60a5fa; /* Blue */
-  color: white;
-  padding: 0.25rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  text-align: center;
-}
-
-.schedule-block-hidden {
-  background-color: #f87171; /* Red */
-  color: white;
-  padding: 0.25rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  text-align: center;
-}
-
-.schedule-block-user {
-  border: 2px solid #2563eb; /* Blue border for user schedules */
-}
-
-.schedule-block-friend {
-  border: 2px dashed #10b981; /* Green dashed border for friend schedules */
+.calendar-cell:hover {
+  background-color: #302d41; /* Hover effect */
 }
 
 .calendar-time-label {
@@ -204,6 +199,67 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  background-color: #f3f4f6;
-  border-right: 1px solid #e5e7eb;
+  background-color: #302d41; /* Time label background */
+  color: #cdd6f4;
+  border-right: 1px solid #45475a;
+}
+
+.schedule-block {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.schedule-block-public {
+  background-color: #89b4fa; /* Blue for public schedules */
+}
+
+.schedule-block-private {
+  background-color: #f38ba8; /* Red for private schedules */
+}
+
+.schedule-block-hidden {
+  background-color: #a6adc8; /* Gray for hidden schedules */
+}
+
+.schedule-block-user {
+  border: 2px solid #f9e2af; /* Yellow border for user schedules */
+}
+
+.schedule-block-friend {
+  border: 2px dashed #94e2d5; /* Green dashed border for friend schedules */
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+nav img {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+nav h1 {
+  font-size: 1.125rem; /* 18px */
+  font-weight: bold;
+}
+
+nav h2 {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 600;
+  color: #89b4fa; /* Light blue */
 }
