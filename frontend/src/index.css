@@ -215,6 +215,8 @@ select {
   background-color: #302d41;
   color: #cdd6f4;
   border-right: 1px solid #45475a;
+  font-size: 0.875rem; /* Perkecil font size label waktu */
+  padding: 4px; /* Kurangi padding label waktu */
 }
 
 .calendar-date {
@@ -236,7 +238,6 @@ select {
   justify-content: center;
   text-align: center;
   transition: all 0.3s ease;
-  animation: fadeScale 0.3s ease;
 }
 
 .schedule-block:hover {
@@ -254,7 +255,7 @@ select {
 }
 
 .schedule-block-hidden {
-  background-color: #a6adc8; /* Gray for hidden schedules */
+  background-color: #a6adc8;
 }
 
 .schedule-block-user {
@@ -300,6 +301,18 @@ select {
 .schedule-block-friend-3 { background-color: #cba6f7; border: 2px solid #b4befe; }
 .schedule-block-friend-4 { background-color: #f5c2e7; border: 2px solid #f5e0dc; }
 
+/* Jadwal grup */
+.schedule-block-group {
+  background-color: #74c7ec; /* Biru muda untuk jadwal grup */
+  border: 2px solid #89b4fa;
+}
+
+/* Jadwal anggota grup */
+.schedule-block-member {
+  background-color: #a6e3a1; /* Hijau muda untuk jadwal anggota grup */
+  border: 2px solid #94e2d5;
+}
+
 nav {
   display: flex;
   align-items: center;
@@ -330,6 +343,10 @@ nav h2 {
 .calendar th,
 .calendar td {
   border: 1px solid #45475a;
+  height: 60px; /* Tinggi sel tetap */
+  padding: 8px; /* Padding untuk membuat lebih proporsional */
+  font-size: 0.875rem; /* Ukuran font yang lebih kecil */
+  min-width: 150px; /* Tambahkan lebar minimum untuk kolom */
 }
 
 .calendar thead th {
@@ -337,19 +354,19 @@ nav h2 {
   top: 0;
   z-index: 20;
   background-color: #302d41;
+  color: #cdd6f4;
+  text-align: center;
+  min-width: 150px; /* Tambahkan lebar minimum untuk header */
 }
 
-.calendar tbody td:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 10;
-  background-color: #302d41;
+.calendar tbody td {
+  min-width: 150px; /* Tambahkan lebar minimum untuk sel */
 }
 
 .calendar-container {
   position: relative;
-  overflow: hidden;
-  height: calc(100vh - 180px);
+  overflow: auto; /* Pastikan tabel dapat di-scroll jika terlalu lebar */
+  height: calc(100vh - 180px); /* Sesuaikan tinggi kalender */
   border-radius: 8px;
   border: 1px solid #45475a;
   background-color: #181825;
@@ -473,4 +490,24 @@ input[type="text"]:focus {
 .animate-slideIn {
   animation: slideIn 0.5s ease-out forwards;
   opacity: 0;
+}
+
+/* Add Schedule card styles */
+.fixed {
+  position: fixed;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.bg-opacity-50 {
+  background-opacity: 0.5;
+}
+
+.z-50 {
+  z-index: 50;
 }

@@ -8,6 +8,8 @@ import Friends from './pages/Friends';
 import FriendSchedules from './pages/FriendSchedules';
 import ProtectedRoute from './components/ProtectedRoute';
 import AddSchedule from './pages/AddSchedule';
+import Groups from './pages/Groups';
+import CreateGroup from './pages/CreateGroup';
 
 function App() {
   return (
@@ -16,32 +18,62 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
-        <Route path="/" element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        } />
-        <Route path="/schedules" element={
-          <ProtectedRoute>
-            <Schedules />
-          </ProtectedRoute>
-        } />
-        <Route path="/friends" element={
-          <ProtectedRoute>
-            <Friends />
-          </ProtectedRoute>
-        } />
-        <Route path="/friends/:friendId/schedules" element={
-          <ProtectedRoute>
-            <FriendSchedules />
-          </ProtectedRoute>
-        } />
-        <Route path="/schedules/add" element={
-          <ProtectedRoute>
-            <AddSchedule />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/schedules"
+          element={
+            <ProtectedRoute>
+              <Schedules />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/friends"
+          element={
+            <ProtectedRoute>
+              <Friends />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/friends/:friendId/schedules"
+          element={
+            <ProtectedRoute>
+              <FriendSchedules />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/schedules/add"
+          element={
+            <ProtectedRoute>
+              <AddSchedule />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/groups"
+          element={
+            <ProtectedRoute>
+              <Groups />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/groups/create"
+          element={
+            <ProtectedRoute>
+              <CreateGroup />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

@@ -47,6 +47,16 @@ const api = {
   getFriendSchedules: (friendId) => axios.get(`${API_URL}/schedules/${friendId}`, {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }),
+  
+  // Group related endpoints
+  createGroup: (groupName) =>
+    axios.post(`${API_URL}/groups`, groupName, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    }),
+  addGroupMember: (groupId, userId) =>
+    axios.post(`${API_URL}/groups/${groupId}/members`, { userId }, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    }),
 };
 
 export default api;

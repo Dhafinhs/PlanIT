@@ -28,6 +28,7 @@ function Navbar() {
               <Link to="/" className="hover:text-[#89b4fa] transition duration-300">Home</Link>
               <Link to="/schedules" className="hover:text-[#89b4fa] transition duration-300">Schedules</Link>
               <Link to="/friends" className="hover:text-[#89b4fa] transition duration-300">Friends</Link>
+              <Link to="/groups" className="hover:text-[#89b4fa] transition duration-300">Groups</Link>
               <button onClick={handleLogout} className="hover:underline hover:text-[#89b4fa] transition duration-300">Logout</button>
             </>
           ) : (
