@@ -15,7 +15,7 @@ PlanIT adalah aplikasi manajemen jadwal yang dirancang untuk membantu pengguna m
 # :bar_chart: Diagram
 
 ## UML
-![UML Diagram](https://via.placeholder.com/800x400?text=UML+Diagram)
+![UML Diagram](https://i.imgur.com/bz2i5z1.png)
 
 ## ERD
 ![ERD Diagram](https://via.placeholder.com/800x400?text=ERD+Diagram)
@@ -132,6 +132,3 @@ Aplikasi ini dapat dideploy menggunakan platform seperti [Vercel](https://vercel
 1. **Deploy ke Railway**:
    Ikuti panduan di [Railway Docs](https://docs.railway.app/).
 
-# :memo: License
-
-Aplikasi ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT).
