@@ -443,9 +443,9 @@ function Home() {
         </div>
       </div>
       
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-col xl:flex-row">
         {/* Friends List */}
-        <div className="w-64 bg-[#302d41] p-4 rounded-lg h-[calc(100vh-180px)] overflow-auto">
+        <div className="w-full xl:w-1/4 bg-[#302d41] p-4 rounded-lg h-60 xl:h-[calc(100vh-180px)] overflow-auto">
           <h2 className="text-xl font-bold mb-4 text-[#cdd6f4]">Friends</h2>
           <input
             type="text"
@@ -487,7 +487,7 @@ function Home() {
         </div>
 
         {/* Groups List */}
-        <div className="w-64 bg-[#302d41] p-4 rounded-lg h-[calc(100vh-180px)] overflow-auto">
+        <div className="w-full xl:w-1/4 bg-[#302d41] p-4 rounded-lg h-40 xl:h-[calc(100vh-180px)] overflow-auto">
           <h2 className="text-xl font-bold mb-4 text-[#cdd6f4]">Groups</h2>
           <div className="space-y-2">
             {groups.map((group) => (
@@ -524,7 +524,7 @@ function Home() {
         </div>
 
         {/* Calendar */}
-        <div className="flex-1">
+        <div className="flex-1 xl:w-2/3 w-full">
           {renderCalendar()}
         </div>
       </div>
