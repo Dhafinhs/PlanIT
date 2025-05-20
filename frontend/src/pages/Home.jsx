@@ -39,7 +39,7 @@ function Home() {
 
     const fetchUserSchedules = async () => {
       try {
-        const res = await axios.get('https://planitbackend-production.up.railway.app/api/schedules', {
+        const res = await axios.get('http://localhost:5000/api/schedules', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserSchedules(res.data);
@@ -51,7 +51,7 @@ function Home() {
 
     const fetchFriends = async () => {
       try {
-        const res = await axios.get('https://planitbackend-production.up.railway.app/api/friends', {
+        const res = await axios.get('http://localhost:5000/api/friends', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFriends(res.data);
@@ -62,7 +62,7 @@ function Home() {
 
     const fetchPendingRequests = async () => {
       try {
-        const res = await axios.get('https://planitbackend-production.up.railway.app/api/friends/pending', {
+        const res = await axios.get('http://localhost:5000/api/friends/pending', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPendingRequests(res.data);
@@ -76,7 +76,7 @@ function Home() {
 
     const fetchGroups = async () => {
       try {
-        const res = await axios.get('https://planitbackend-production.up.railway.app/api/groups', {
+        const res = await axios.get('http://localhost:5000/api/groups', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setGroups(res.data);
@@ -110,7 +110,7 @@ function Home() {
   const handleFriendToggle = async (friendId, checked) => {
     if (checked) {
       try {
-        const res = await axios.get(`https://planitbackend-production.up.railway.app/api/schedules/${friendId}`, {
+        const res = await axios.get(`http://localhost:5000/api/schedules/${friendId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         const friendSchedules = res.data.map(schedule => ({
@@ -134,7 +134,7 @@ function Home() {
   const handleGroupToggle = async (groupId, checked) => {
     if (checked) {
       try {
-        const res = await axios.get(`https://planitbackend-production.up.railway.app/api/groups/${groupId}/schedule`, {
+        const res = await axios.get(`http://localhost:5000/api/groups/${groupId}/schedule`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         const groupSchedules = res.data.map(schedule => ({

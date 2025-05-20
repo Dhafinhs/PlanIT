@@ -14,7 +14,7 @@ function CreateGroup() {
     const fetchFriends = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('https://planitbackend-production.up.railway.app/api/friends', {
+        const res = await axios.get('http://localhost:5000/api/friends', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFriends(res.data);
@@ -49,7 +49,7 @@ function CreateGroup() {
     try {
       const token = localStorage.getItem('token');
       const res = await axios.post(
-        'https://planitbackend-production.up.railway.app/api/groups',
+        'http://localhost:5000/api/groups',
         { name: groupName },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -59,7 +59,7 @@ function CreateGroup() {
       for (const memberId of selectedMembers) {
         try {
           await axios.post(
-            `https://planitbackend-production.up.railway.app/api/groups/${groupId}/members`,
+            `http://localhost:5000/api/groups/${groupId}/members`,
             { userId: memberId },
             { headers: { Authorization: `Bearer ${token}` } }
           );

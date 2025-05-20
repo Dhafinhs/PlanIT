@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://planitbackend-production.up.railway.app/api';
+const API_URL = 'http://localhost:5000/api';
 
 const api = {
   // User related endpoints

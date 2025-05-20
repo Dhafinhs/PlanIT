@@ -11,7 +11,7 @@ function Groups() {
 
   const fetchGroups = async () => {
     try {
-      const res = await axios.get('https://planitbackend-production.up.railway.app/api/groups', {
+      const res = await axios.get('http://localhost:5000/api/groups', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setGroups(res.data);
@@ -23,14 +23,14 @@ function Groups() {
   const handleSelectGroup = async (groupId) => {
     try {
       console.log(`Fetching details for group ID: ${groupId}`); // Debug log
-      const res = await axios.get(`https://planitbackend-production.up.railway.app/api/groups/${groupId}`, {
+      const res = await axios.get(`http://localhost:5000/api/groups/${groupId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setSelectedGroup(res.data.group);
       setMembers(res.data.members);
 
       // Fetch schedules for the selected group
-      const scheduleRes = await axios.get(`https://planitbackend-production.up.railway.app/api/groups/${groupId}/schedule`, {
+      const scheduleRes = await axios.get(`http://localhost:5000/api/groups/${groupId}/schedule`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setSchedules(scheduleRes.data);
@@ -43,7 +43,7 @@ function Groups() {
     if (!window.confirm('Are you sure you want to delete this group?')) return;
     try {
       console.log(`Attempting to delete group ID: ${groupId}`); // Debug log
-      await axios.delete(`https://planitbackend-production.up.railway.app/api/groups/${groupId}`, {
+      await axios.delete(`http://localhost:5000/api/groups/${groupId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setGroups((prev) => prev.filter((group) => group.id !== groupId));

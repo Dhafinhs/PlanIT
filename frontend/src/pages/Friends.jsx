@@ -23,7 +23,7 @@ function Friends() {
   const fetchFriends = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('https://planitbackend-production.up.railway.app/api/friends', {
+      const res = await axios.get('http://localhost:5000/api/friends', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setFriends(res.data);
@@ -37,7 +37,7 @@ function Friends() {
 
   const fetchPendingRequests = async () => {
     try {
-      const res = await axios.get('https://planitbackend-production.up.railway.app/api/friends/pending', {
+      const res = await axios.get('http://localhost:5000/api/friends/pending', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setPendingRequests(res.data);
