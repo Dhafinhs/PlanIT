@@ -229,7 +229,7 @@ function Home() {
         <div className="schedule-title">{schedule.title}</div>
         {(!schedule.isFriendSchedule || schedule.visibility === 'public') && (
           <>
-            <div className="text-xs text-white">
+            <div className="text-xs text-white hidden sm:block">
               {new Date(schedule.start_time).toLocaleTimeString()} - {new Date(schedule.end_time).toLocaleTimeString()}
             </div>
             {schedule.description && (
