@@ -39,7 +39,7 @@ function Home() {
 
     const fetchUserSchedules = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/schedules', {
+        const res = await axios.get('/api/schedules', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserSchedules(res.data);
@@ -51,7 +51,7 @@ function Home() {
 
     const fetchFriends = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/friends', {
+        const res = await axios.get('/api/friends', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFriends(res.data);
@@ -62,7 +62,7 @@ function Home() {
 
     const fetchPendingRequests = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/friends/pending', {
+        const res = await axios.get('/api/friends/pending', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPendingRequests(res.data);
@@ -77,7 +77,7 @@ function Home() {
     const fetchGroups = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/api/groups', {
+        const res = await axios.get('/api/groups', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setGroups(res.data);
@@ -111,7 +111,7 @@ function Home() {
   const handleFriendToggle = async (friendId, checked) => {
     if (checked) {
       try {
-        const res = await axios.get(`http://localhost:5000/api/schedules/${friendId}`, {
+        const res = await axios.get(`/api/schedules/${friendId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         const friendSchedules = res.data.map(schedule => ({
@@ -135,7 +135,7 @@ function Home() {
   const handleGroupToggle = async (groupId, checked) => {
     if (checked) {
       try {
-        const res = await axios.get(`http://localhost:5000/api/groups/${groupId}/schedule`, {
+        const res = await axios.get(`/api/groups/${groupId}/schedule`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         const groupSchedules = res.data.map(schedule => ({
@@ -321,14 +321,14 @@ function Home() {
         if (form.id) {
           // Update existing personal schedule
           await axios.put(
-            `http://localhost:5000/api/schedules/${form.id}`,
+            `/api/schedules/${form.id}`,
             form,
             { headers: { Authorization: `Bearer ${token}` } }
           );
         } else {
           // Add new personal schedule
           await axios.post(
-            'http://localhost:5000/api/schedules',
+            '/api/schedules',
             form,
             { headers: { Authorization: `Bearer ${token}` } }
           );
@@ -336,7 +336,7 @@ function Home() {
       } else if (scheduleType === 'group' && selectedGroup) {
         // Add new group schedule
         await axios.post(
-          `http://localhost:5000/api/groups/${selectedGroup}/schedule`,
+          `/api/groups/${selectedGroup}/schedule`,
           form,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -344,7 +344,7 @@ function Home() {
       alert('Schedule saved successfully!');
       setShowAddSchedule(false);
       // Refresh schedules
-      const res = await axios.get('http://localhost:5000/api/schedules', {
+      const res = await axios.get('/api/schedules', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAllSchedules(res.data);
@@ -357,7 +357,7 @@ function Home() {
     try {
       const token = localStorage.getItem('token');
       const res = await axios.post(
-        'http://localhost:5000/api/groups',
+        '/api/groups',
         { name: groupName },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -367,7 +367,7 @@ function Home() {
       // Add selected members to the group
       for (const memberId of selectedGroupMembers) {
         await axios.post(
-          `http://localhost:5000/api/groups/${groupId}/members`,
+          `/api/groups/${groupId}/members`,
           { userId: memberId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -393,7 +393,7 @@ function Home() {
 
   const handleGroupClick = async (groupId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/groups/${groupId}/schedule`, {
+      const res = await axios.get(`/api/groups/${groupId}/schedule`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       alert(`Schedules for group ${groupId}: ${JSON.stringify(res.data, null, 2)}`);
@@ -412,7 +412,7 @@ function Home() {
       });
     } else {
       try {
-        const res = await axios.get(`http://localhost:5000/api/groups/${groupId}`, {
+        const res = await axios.get(`/api/groups/${groupId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setGroupMembers((prev) => ({

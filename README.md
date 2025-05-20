@@ -74,7 +74,7 @@ git clone https://github.com/username/PlanIT.git
 
 5. **Akses API di browser atau Postman**:
    ```
-   http://localhost:5000
+   
    ```
 
 # 💻 Progress Report:
