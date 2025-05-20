@@ -18,7 +18,8 @@ PlanIT adalah aplikasi manajemen jadwal yang dirancang untuk membantu pengguna m
 ![UML Diagram](https://i.imgur.com/bz2i5z1.png)
 
 ## ERD
-![ERD Diagram](https://github.com/user-attachments/assets/b8d0fed8-8767-4439-a785-2f6e07662f2e)
+![ERD Diagram](https://github.com/user-attachments/assets/16796295-518d-4b59-8181-cb15beb1e6a0)
+)
 
 ## Flowchart
 ![Flowchart](https://via.placeholder.com/800x400?text=Flowchart)
