@@ -18,7 +18,7 @@ function Schedules() {
   const fetchSchedules = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/schedules', {
+      const res = await axios.get('/api/schedules', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSchedules(res.data);
@@ -59,7 +59,7 @@ function Schedules() {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/schedules/${form.id}`,
+        `/api/schedules/${form.id}`,
         form,
         { headers: { Authorization: `Bearer ${token}` } }
       );
