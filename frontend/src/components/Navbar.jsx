@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '/logo.svg'; // Import logo.svg
 import { useState } from 'react';
 
 function Navbar() {
@@ -14,8 +13,9 @@ const handleLogout = () => {
 };
 
 return (
+    <div>
     <nav className="bg-[#302d41] text-[#cdd6f4] p-4 shadow-md">
-        <div className="container mx-auto flex flex-col justify-between items-center">
+        <div className="container mx-auto flex justify-between items-center">
             {/* Logo and Title */}
             <div className="flex items-center space-x-3 logo-container">
                 {/* SVG Pakai Manual biar bisa ganti warna */}
@@ -87,11 +87,28 @@ return (
                 }
                 {token && <button onClick={handleLogout} className="hover:underline hover:text-[#89b4fa] transition duration-300">Logout</button>}
             </div>
-            <button className='block sm:hidden h-8 w-8' onClick={() => {setOpen(!open)}}>
-
+            
+            <button className='block sm:hidden h-8 w-8 align-middle text-center' onClick={() => {setOpen(!open)}}>
+                <svg className="fill-white h-6 w-6" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24.75 24.75" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M0,3.875c0-1.104,0.896-2,2-2h20.75c1.104,0,2,0.896,2,2s-0.896,2-2,2H2C0.896,5.875,0,4.979,0,3.875z M22.75,10.375H2 c-1.104,0-2,0.896-2,2c0,1.104,0.896,2,2,2h20.75c1.104,0,2-0.896,2-2C24.75,11.271,23.855,10.375,22.75,10.375z M22.75,18.875H2 c-1.104,0-2,0.896-2,2s0.896,2,2,2h20.75c1.104,0,2-0.896,2-2S23.855,18.875,22.75,18.875z"></path> </g> </g></svg>
             </button>
         </div>
     </nav>
+            {open && (
+                <div className="sm:hidden flex flex-col space-y-2 bg-[#302d41] p-2 text-center">
+                    {(token ? navLoggedIn : navLoggedOut).map(({to, text}) => (
+                        <NavItem key={to} to={to} text={text} />
+                    ))}
+                    {token && (
+                        <button
+                            onClick={handleLogout}
+                            className="hover:underline hover:text-[#89b4fa] transition duration-300 text-center"
+                        >
+                            Logout
+                        </button>
+                    )}
+                </div>
+            )}
+            </div>
 );
 }
 
@@ -123,7 +140,7 @@ const navLoggedOut = [
 
 function NavItem({ to, text }) {
     return (
-        <Link to={to} className='hover:text-[#89b4fa] transition duration-300'>{ text }</Link>
+        <Link to={to} className='hover:text-[#89b4fa] transition duration-300 border-black border-spacing-1'>{ text }</Link>
     )
 }
 
