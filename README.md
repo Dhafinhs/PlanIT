@@ -21,8 +21,7 @@ PlanIT adalah aplikasi manajemen jadwal yang dirancang untuk membantu pengguna m
 ![ERD Diagram](https://github.com/user-attachments/assets/16796295-518d-4b59-8181-cb15beb1e6a0)
 
 ## Flowchart
-![Flowchart](https://via.placeholder.com/800x400?text=Flowchart)
-)
+![Flowchart](https://i.imgur.com/Sckjxga.png)
 
 # :computer: Installation Guide
 
@@ -68,21 +67,9 @@ git clone https://github.com/username/PlanIT.git
    npm install
    ```
 
-3. **Buat file `.env`**:
-   Tambahkan variabel berikut ke file `.env`:
+3. **Jalankan server**:
    ```
-   PORT=5000
-   DB_USER=your_database_user
-   DB_PASSWORD=your_database_password
-   DB_NAME=your_database_name
-   DB_HOST=your_database_host
-   DB_PORT=your_database_port
-   JWT_SECRET=your_jwt_secret
-   ```
-
-4. **Jalankan server**:
-   ```
-   npm run start
+   node server.js
    ```
 
 5. **Akses API di browser atau Postman**:
@@ -91,28 +78,29 @@ git clone https://github.com/username/PlanIT.git
    ```
 
 # 💻 Progress Report:
-
-## Fitur yang Sudah Selesai:
-- [x] Autentikasi pengguna (Login & Register)
-- [x] Pembuatan dan pengelolaan jadwal pribadi
-- [x] Pembuatan grup dan pengelolaan anggota grup
-- [x] Pembuatan jadwal grup
-- [x] Berbagi jadwal dengan teman
-- [x] Tampilan kalender interaktif
-
-## Fitur yang Sedang Dikembangkan:
-- [ ] Notifikasi real-time untuk perubahan jadwal
-- [ ] Integrasi dengan Google Calendar
+- progress checking 1
+![](https://i.imgur.com/rC3VWO0.jpeg)
+- progress checking 2
+![](https://i.imgur.com/E1FtDUw.jpeg)
 
 ## Tampilan Aplikasi:
 ### Halaman Login
-![Login Page](https://via.placeholder.com/800x400?text=Login+Page)
+![Login Page](https://cdn.imgpile.com/f/A4bkPpj_xl.png)
 
-### Halaman Kalender
-![Calendar Page](https://via.placeholder.com/800x400?text=Calendar+Page)
+### Halaman Dashboard
+![Calendar Page](https://cdn.imgpile.com/f/ZstIyRY_xl.png)
+
+### Halaman Membuat Grup
+![Create Group](https://cdn.imgpile.com/f/1opA9VI_xl.png)
 
 ### Halaman Grup
-![Groups Page](https://via.placeholder.com/800x400?text=Groups+Page)
+![Groups Page](https://cdn.imgpile.com/f/ASJPPCK_xl.png)
+
+### Halaman Schedule
+![Schedule Page](https://cdn.imgpile.com/f/3Pbwosy_xl.png)
+
+### Halaman Tambahkan Schedule
+![Add Schedule](https://cdn.imgpile.com/f/UJb9UQu_xl.png)
 
 # :rocket: Deployment
 
