@@ -39,7 +39,7 @@ function Home() {
 
     const fetchUserSchedules = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/schedules', {
+        const res = await axios.get('https://planitbackend-production.up.railway.app/api/schedules', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserSchedules(res.data);
@@ -51,7 +51,7 @@ function Home() {
 
     const fetchFriends = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/friends', {
+        const res = await axios.get('https://planitbackend-production.up.railway.app/api/friends', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFriends(res.data);
@@ -62,7 +62,7 @@ function Home() {
 
     const fetchPendingRequests = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/friends/pending', {
+        const res = await axios.get('https://planitbackend-production.up.railway.app/api/friends/pending', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPendingRequests(res.data);
@@ -76,8 +76,7 @@ function Home() {
 
     const fetchGroups = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/api/groups', {
+        const res = await axios.get('https://planitbackend-production.up.railway.app/api/groups', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setGroups(res.data);

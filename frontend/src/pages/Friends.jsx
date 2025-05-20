@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import api from '../services/api';
 import Notification from '../components/Notification';
 
@@ -22,7 +23,9 @@ function Friends() {
   const fetchFriends = async () => {
     setLoading(true);
     try {
-      const res = await api.getFriends();
+      const res = await axios.get('https://planitbackend-production.up.railway.app/api/friends', {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
       setFriends(res.data);
     } catch (err) {
       console.error(err);
@@ -34,7 +37,9 @@ function Friends() {
 
   const fetchPendingRequests = async () => {
     try {
-      const res = await api.getPendingRequests();
+      const res = await axios.get('https://planitbackend-production.up.railway.app/api/friends/pending', {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
       setPendingRequests(res.data);
     } catch (err) {
       console.error(err);
