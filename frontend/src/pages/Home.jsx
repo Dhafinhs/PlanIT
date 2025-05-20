@@ -193,28 +193,41 @@ function Home() {
     setShowAddSchedule(true);
   };
 
+  const renderLegend = () => (
+    <div className="flex justify-center space-x-4 mb-4">
+      <div className="flex items-center space-x-2">
+        <div className="w-4 h-4 bg-[#89b4fa] border-t-4 border-[#74c7ec]"></div>
+        <span className="text-[#cdd6f4] text-sm">Public</span>
+      </div>
+      <div className="flex items-center space-x-2">
+        <div className="w-4 h-4 bg-[#f38ba8] border-t-4 border-[#eba0ac]"></div>
+        <span className="text-[#cdd6f4] text-sm">Private</span>
+      </div>
+      <div className="flex items-center space-x-2">
+        <div className="w-4 h-4 bg-[#a6adc8] border-t-4 border-[#6c7086]"></div>
+        <span className="text-[#cdd6f4] text-sm">Hidden</span>
+      </div>
+    </div>
+  );
+
   const renderScheduleBlock = (schedule, time) => {
     const startHour = new Date(schedule.start_time).getHours();
     const endHour = new Date(schedule.end_time).getHours();
     const duration = endHour - startHour;
 
-    // Get class based on schedule type
     const getScheduleClass = () => {
-      if (schedule.isGroupSchedule) {
-        return schedule.isMemberSchedule
-          ? 'schedule-block-member' // Warna untuk jadwal anggota grup
-          : 'schedule-block-group'; // Warna untuk jadwal grup
-      } else if (!schedule.isFriendSchedule) {
-        switch (schedule.visibility) {
-          case 'public': return 'schedule-block-own-public';
-          case 'private': return 'schedule-block-own-private';
-          case 'hidden': return 'schedule-block-own-hidden';
-          default: return '';
-        }
-      } else {
-        // Assign different colors to different friends using modulo
-        const friendIndex = selectedFriends.indexOf(schedule.friendId) % 5;
-        return `schedule-block-friend-${friendIndex}`;
+      if (!schedule.isFriendSchedule && !schedule.isGroupSchedule) {
+        return 'border-t-4 border-[#f9e2af] bg-[#f9e2af]'; // Distinct color for user schedules
+      }
+      switch (schedule.visibility) {
+        case 'public':
+          return 'border-t-4 border-[#74c7ec] bg-[#89b4fa]';
+        case 'private':
+          return 'border-t-4 border-[#eba0ac] bg-[#f38ba8]';
+        case 'hidden':
+          return 'border-t-4 border-[#6c7086] bg-[#a6adc8]';
+        default:
+          return '';
       }
     };
 
@@ -227,7 +240,7 @@ function Home() {
         }}
       >
         <div className="schedule-title">{schedule.title}</div>
-        {(!schedule.isFriendSchedule || schedule.visibility === 'public') && (
+        {schedule.visibility !== 'hidden' && (
           <>
             <div className="text-xs text-white">
               {new Date(schedule.start_time).toLocaleTimeString()} - {new Date(schedule.end_time).toLocaleTimeString()}
@@ -235,7 +248,6 @@ function Home() {
             {schedule.description && (
               <div className="text-xs text-white">{schedule.description}</div>
             )}
-            <div className="text-xs text-white">{schedule.owner_name}</div>
           </>
         )}
       </div>
@@ -443,6 +455,9 @@ function Home() {
         </div>
       </div>
       
+      {/* Legend */}
+      {renderLegend()}
+
       <div className="flex gap-4">
         {/* Friends List */}
         <div className="w-64 bg-[#302d41] p-4 rounded-lg h-[calc(100vh-180px)] overflow-auto">

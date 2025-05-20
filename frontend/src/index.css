@@ -258,8 +258,10 @@ select {
   background-color: #a6adc8;
 }
 
+/* User schedule styles */
 .schedule-block-user {
-  border: 2px solid #f9e2af; /* Yellow border for user schedules */
+  border-top: 4px solid #f9e2af; /* Yellow border for user schedules */
+  background-color: #f9e2af; /* Yellow background for user schedules */
 }
 
 .schedule-block-friend {
@@ -460,54 +462,102 @@ td[onclick] {
   to { transform: translateY(0); opacity: 1; }
 }
 
-.animate-slideDown {
-  animation: slideDown 0.5s ease-out;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.animate-slideUp {
-  animation: slideUp 0.5s ease-out;
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-out;
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-/* Enhanced hover effects */
-.transform.hover\:scale-102:hover {
-  transform: scale(1.02);
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-/* Search input enhancements */
-input[type="text"] {
-  transition: all 0.3s ease;
+/* Utility Classes for Animations */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-input[type="text"]:focus {
-  box-shadow: 0 0 0 2px rgba(137, 180, 250, 0.3);
+.animate-slide-in-left {
+  animation: slideInFromLeft 0.5s ease-in-out;
 }
 
-/* Friend card animations */
-.animate-slideIn {
-  animation: slideIn 0.5s ease-out forwards;
-  opacity: 0;
+.animate-slide-in-right {
+  animation: slideInFromRight 0.5s ease-in-out;
 }
 
-/* Add Schedule card styles */
-.fixed {
-  position: fixed;
+.animate-scale-up {
+  animation: scaleUp 0.5s ease-in-out;
 }
 
-.inset-0 {
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+/* Enhanced Hover Effects */
+.hover-scale-up:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
 }
 
-.bg-opacity-50 {
-  background-opacity: 0.5;
+.hover-shadow:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.z-50 {
-  z-index: 50;
+/* Apply Animations to Common Elements */
+body {
+  animation: fadeIn 1s ease-in-out;
+}
+
+button {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(137, 180, 250, 0.3);
+}
+
+/* Navbar Animation */
+nav {
+  animation: slideInFromTop 0.5s ease-in-out;
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
