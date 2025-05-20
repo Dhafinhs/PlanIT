@@ -20,7 +20,7 @@ function AddSchedule() {
     const fetchGroups = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/api/groups', {
+        const res = await axios.get('https://planitbackend-production.up.railway.app/api/groups', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setGroups(res.data);
@@ -42,13 +42,13 @@ function AddSchedule() {
       const token = localStorage.getItem('token');
       if (scheduleType === 'personal') {
         await axios.post(
-          'http://localhost:5000/api/schedules',
+          'https://planitbackend-production.up.railway.app/api/schedules',
           form,
           { headers: { Authorization: `Bearer ${token}` } }
         );
       } else if (scheduleType === 'group' && selectedGroup) {
         await axios.post(
-          `http://localhost:5000/api/groups/${selectedGroup}/schedule`,
+          `https://planitbackend-production.up.railway.app/api/groups/${selectedGroup}/schedule`,
           form,
           { headers: { Authorization: `Bearer ${token}` } }
         );

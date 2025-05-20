@@ -110,7 +110,7 @@ function Home() {
   const handleFriendToggle = async (friendId, checked) => {
     if (checked) {
       try {
-        const res = await axios.get(`http://localhost:5000/api/schedules/${friendId}`, {
+        const res = await axios.get(`https://planitbackend-production.up.railway.app/api/schedules/${friendId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         const friendSchedules = res.data.map(schedule => ({
@@ -134,7 +134,7 @@ function Home() {
   const handleGroupToggle = async (groupId, checked) => {
     if (checked) {
       try {
-        const res = await axios.get(`http://localhost:5000/api/groups/${groupId}/schedule`, {
+        const res = await axios.get(`https://planitbackend-production.up.railway.app/api/groups/${groupId}/schedule`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         const groupSchedules = res.data.map(schedule => ({
