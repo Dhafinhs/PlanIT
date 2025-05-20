@@ -229,7 +229,7 @@ function Home() {
         <div className="schedule-title">{schedule.title}</div>
         {(!schedule.isFriendSchedule || schedule.visibility === 'public') && (
           <>
-            <div className="text-xs text-white">
+            <div className="text-xs text-white hidden sm:block">
               {new Date(schedule.start_time).toLocaleTimeString()} - {new Date(schedule.end_time).toLocaleTimeString()}
             </div>
             {schedule.description && (
@@ -264,9 +264,9 @@ function Home() {
                   Time
                 </th>
                 {weekDates.map((date, index) => (
-                  <th key={index} className="p-2 min-w-[150px] border-r border-[#45475a]">
+                  <th key={index} className="p-2 min-w-[50px] max-w-[200px] border-r border-[#45475a]">
                     <div className="font-bold text-[#cdd6f4]">{days[date.getDay()]}</div>
-                    <div className="text-sm text-[#a6adc8]">{date.toLocaleDateString()}</div>
+                    <div className="text-sm text-[#a6adc8] ">{date.getDate()}</div>
                   </th>
                 ))}
               </tr>
