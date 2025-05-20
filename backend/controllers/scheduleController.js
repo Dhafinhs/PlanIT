@@ -61,3 +61,23 @@ exports.getFriendSchedules = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+exports.updateSchedule = async (req, res) => {
+  const { id } = req.params;
+  const { title, description, start_time, end_time, visibility } = req.body;
+  try {
+    const result = await db.query(
+      `UPDATE schedules
+       SET title = $1, description = $2, start_time = $3, end_time = $4, visibility = $5
+       WHERE id = $6 AND user_id = $7
+       RETURNING *`,
+      [title, description, start_time, end_time, visibility, id, req.user.id]
+    );
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Schedule not found or not authorized' });
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};

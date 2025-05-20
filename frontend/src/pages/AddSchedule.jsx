@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import axios from 'axios';
 
 function AddSchedule() {
@@ -12,6 +12,25 @@ function AddSchedule() {
     end_time: '',
     visibility: 'public',
   });
+  const [scheduleType, setScheduleType] = useState('personal'); // State untuk tipe jadwal
+  const [groups, setGroups] = useState([]); // State untuk daftar grup
+  const [selectedGroup, setSelectedGroup] = useState(''); // State untuk grup yang dipilih
+
+  useEffect(() => {
+    const fetchGroups = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await axios.get('http://localhost:5000/api/groups', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setGroups(res.data);
+      } catch (err) {
+        console.error('Failed to fetch groups:', err);
+      }
+    };
+
+    fetchGroups();
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,11 +40,19 @@ function AddSchedule() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post(
-        'http://localhost:5000/api/schedules',
-        form,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      if (scheduleType === 'personal') {
+        await axios.post(
+          'http://localhost:5000/api/schedules',
+          form,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+      } else if (scheduleType === 'group' && selectedGroup) {
+        await axios.post(
+          `http://localhost:5000/api/groups/${selectedGroup}/schedule`,
+          form,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+      }
       alert('Schedule added successfully!');
       navigate('/schedules');
     } catch (err) {
@@ -37,6 +64,34 @@ function AddSchedule() {
     <div className="min-h-screen flex items-center justify-center bg-[#1e1e2e]">
       <form onSubmit={handleSubmit} className="bg-[#302d41] p-6 rounded shadow-md w-96">
         <h2 className="text-xl font-bold mb-4 text-[#cdd6f4]">Add Schedule</h2>
+        <div className="mb-4">
+          <label className="block text-[#cdd6f4] mb-2">Schedule Type</label>
+          <select
+            value={scheduleType}
+            onChange={(e) => setScheduleType(e.target.value)}
+            className="w-full border p-2 mb-3"
+          >
+            <option value="personal">Personal</option>
+            <option value="group">Group</option>
+          </select>
+        </div>
+        {scheduleType === 'group' && (
+          <div className="mb-4">
+            <label className="block text-[#cdd6f4] mb-2">Select Group</label>
+            <select
+              value={selectedGroup}
+              onChange={(e) => setSelectedGroup(e.target.value)}
+              className="w-full border p-2 mb-3"
+            >
+              <option value="">-- Select Group --</option>
+              {groups.map((group) => (
+                <option key={group.id} value={group.id}>
+                  {group.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
         <input
           name="title"
           placeholder="Title"
@@ -65,17 +120,21 @@ function AddSchedule() {
           value={form.end_time}
           onChange={handleChange}
         />
-        <select
-          name="visibility"
-          className="w-full border p-2 mb-3"
-          value={form.visibility}
-          onChange={handleChange}
-        >
-          <option value="public">Public</option>
-          <option value="private">Private</option>
-          <option value="hidden">Hidden</option>
-        </select>
-        <button className="w-full py-2">Add Schedule</button>
+        {scheduleType === 'personal' && (
+          <select
+            name="visibility"
+            className="w-full border p-2 mb-3"
+            value={form.visibility}
+            onChange={handleChange}
+          >
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+            <option value="hidden">Hidden</option>
+          </select>
+        )}
+        <button className="w-full py-2 bg-[#89b4fa] text-white rounded">
+          Add Schedule
+        </button>
       </form>
     </div>
   );
